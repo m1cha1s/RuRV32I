@@ -11,13 +11,16 @@ pub trait BusIF {
 
     fn load(&self, addr: u64, size: usize) -> Result<u64, ()>;
     fn store(&mut self, addr: u64, size: usize, val: u64) -> Result<(), ()>;
+
+    fn tick(&mut self) -> &mut Self;
 }
 
+#[derive(Clone, Copy)]
 pub enum CoreState {
     Running(u64),
     Waiting(u64),
     Exception(u64),
-    Exited(u64),
+    Stopped(u64),
 }
 
 pub trait Core {

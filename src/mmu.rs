@@ -65,4 +65,11 @@ where
             Err(())
         }
     }
+
+    fn tick(&mut self) -> &mut Self {
+        self.mem.tick();
+        self.periph.tick();
+
+        self
+    }
 }
